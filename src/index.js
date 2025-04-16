@@ -9,6 +9,9 @@ import { createUser } from './controllers/userController.js';
 
 const app = express();
 
+// Health check endpoint
+app.get('/health', (req, res) => res.send('OK'));
+
 // Configure CORS for frontend/API gateway access
 app.use(cors({
   origin: [
@@ -24,7 +27,7 @@ app.use(cors({
 app.use(express.json());
 
 export const userServiceClient = axios.create({
-  baseURL: process.env.AUTH_SERVICE_URL || 'http://auth-service:3000',
+  baseURL: process.env.AUTH_SERVICE_URL || 'http://auth-service:3000', // Using original service reference
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
@@ -43,7 +46,7 @@ app.use('/users', verifyJWT, userRoute);
 app.use(errorHandler);
 
 // Start server
-const PORT = 3000;
+const PORT = 3000; // Reverted back to original port
 app.listen(PORT, () => {
   console.log(`User Service running on port ${PORT}`);
 });
