@@ -1,0 +1,46 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Clone shared dependency
+        run: git clone https://github.com/Yordanov-EOOD/shared.git shared
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Create test environment variables
+        run: |
+          echo "# Test environment variables" > .env.test
+          echo "NODE_ENV=test" >> .env.test
+          echo "USER_DB_USER=test_user" >> .env.test
+          echo "USER_DB_PASS=test_pass" >> .env.test
+          echo "USER_DB_NAME=test_db" >> .env.test
+          echo "DATABASE_URL=postgresql://test_user:test_pass@localhost:5432/test_db?schema=public" >> .env.test
+          echo "ACCESS_TOKEN_SECRET=test-access-token-secret" >> .env.test
+          echo "REFRESH_TOKEN_SECRET=test-refresh-token-secret" >> .env.test
+          echo "AUTH_SERVICE_URL=http://localhost:3000" >> .env.test
+          echo "PORT=3000" >> .env.test
+      
+      - name: Run linter
+        run: npm run lint
+      
+      - name: Run tests
+        run: npm test
