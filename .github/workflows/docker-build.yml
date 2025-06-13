@@ -13,6 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         
+      # Clone shared dependency into workspace
+      - name: Clone shared dependency
+        run: git clone https://github.com/Yordanov-EOOD/shared.git shared
+        
       # Create .env file with secrets
       - name: Create .env file
         run: |
