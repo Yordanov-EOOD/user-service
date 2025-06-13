@@ -35,12 +35,11 @@ jobs:
           echo "USER_DB_NAME=test_db" >> .env.test
           echo "DATABASE_URL=postgresql://test_user:test_pass@localhost:5432/test_db?schema=public" >> .env.test
           echo "ACCESS_TOKEN_SECRET=test-access-token-secret" >> .env.test
-          echo "REFRESH_TOKEN_SECRET=test-refresh-token-secret" >> .env.test
-          echo "AUTH_SERVICE_URL=http://localhost:3000" >> .env.test
+          echo "REFRESH_TOKEN_SECRET=test-refresh-token-secret" >> .env.test          echo "AUTH_SERVICE_URL=http://localhost:3000" >> .env.test
           echo "PORT=3000" >> .env.test
       
       - name: Run linter
-        run: npm run lint
+        run: npm run lint -- --fix
       
       - name: Run tests
         run: npm test

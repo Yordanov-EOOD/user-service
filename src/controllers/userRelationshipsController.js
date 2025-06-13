@@ -40,7 +40,7 @@ export const followUser = async (req, res) => {
         
         // Validate users exist
         if (!follower || !following) {
-          throw new Error(`One or more users not found`);
+          throw new Error('One or more users not found');
         }
         
         // Check if already following

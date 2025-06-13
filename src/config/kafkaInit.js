@@ -1,5 +1,5 @@
 import { getUserServiceProducer, KafkaConsumer, TOPICS, CONSUMER_GROUPS } from '/app/shared/kafka.js';
-import  UserService  from "../services/userService.js"
+import  UserService  from '../services/userService.js';
 import prisma from '/app/src/config/db.js';
 import performance from '../utils/performance.js';
 

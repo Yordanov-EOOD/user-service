@@ -5,7 +5,8 @@ const logger = require('../src/config/logger');
 /**
  * Health check script for monitoring service health
  */
-class HealthChecker {  constructor() {
+class HealthChecker {
+  constructor() {
     this.serviceUrl = `http://localhost:${config.server.port}`;
     this.checkInterval = 60000; // 1 minute
     this.endpoints = [

@@ -153,7 +153,7 @@ const rateLimitErrorHandler = (req, res) => {
     message: 'Too many requests, please try again later.',
     correlationId: req.correlationId,
     timestamp: new Date().toISOString(),
-      retryAfter: '15 minutes'
+    retryAfter: '15 minutes'
   });
 };
 

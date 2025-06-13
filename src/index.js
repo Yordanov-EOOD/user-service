@@ -151,7 +151,7 @@ app.get('/health/detailed', catchAsync(async (req, res) => {
     },
     correlationId: req.correlationId
   };
-    res.status(200).json(detailedHealth);
+  res.status(200).json(detailedHealth);
 }));
 
 // Metrics endpoint for Prometheus

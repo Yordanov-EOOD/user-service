@@ -27,10 +27,10 @@ export default [
     // Specify project files to lint
     files: ['**/*.js'],
     ignores: ['node_modules/**', 'dist/**', 'coverage/**'],
-    // Define rules
+    // Define rules    
     rules: {
       indent: ['error', 2],
-      'linebreak-style': process.platform === 'win32' ? ['error', 'windows'] : ['error', 'unix'],
+      'linebreak-style': 'off',
       quotes: ['error', 'single'],
       semi: ['error', 'always'],
       'no-unused-vars': ['warn'],

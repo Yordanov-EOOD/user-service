@@ -46,7 +46,7 @@ export const initializeJobQueue = async () => {
       
       // Invalidate relevant caches
       await invalidateCache(`user:profile:${userId}`);
-      await invalidateCache(`user:list`);
+      await invalidateCache('user:list');
       
       return { success: true, userId };
     });
