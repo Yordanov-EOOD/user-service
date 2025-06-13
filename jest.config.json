@@ -1,0 +1,27 @@
+{
+  "testEnvironment": "node",
+  "roots": ["<rootDir>/src", "<rootDir>/tests"],
+  "moduleDirectories": ["node_modules", "src"],
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"],
+  "testMatch": ["**/__tests__/**/*.js", "**/?(*.)+(spec|test).js"],
+  "collectCoverage": true,
+  "coverageDirectory": "coverage",
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/tests/"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "userRoutes\\.test\\.js$"
+  ],
+  "verbose": true,
+  "transform": {
+    "^.+\\.js$": "babel-jest"
+  },
+  "transformIgnorePatterns": [
+    "node_modules/(?!(@babel)/)"
+  ],
+  "testEnvironmentOptions": {
+    "url": "http://localhost/"
+  }
+}

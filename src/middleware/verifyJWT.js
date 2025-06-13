@@ -17,8 +17,7 @@ const verifyJWT = (req, res, next) => {
     }
 
     req.user = user;
-    next();
-  });
+    next();  });
 };
 
 export default verifyJWT;

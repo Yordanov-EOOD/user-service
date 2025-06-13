@@ -12,14 +12,15 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY prisma/ ./prisma/
+COPY user-service/package*.json ./
+COPY user-service/prisma/ ./prisma/
 
 # Install and rebuild native modules
 RUN npm ci --include=dev
 RUN npx prisma generate
 
-COPY src/ ./src
+COPY user-service/src/ ./src
+COPY shared/ ./shared/
 
 # Create a default .env file if none exists
 RUN touch .env
@@ -40,8 +41,9 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/src ./src
+COPY --from=builder /app/shared ./shared
 COPY --from=builder /app/.env ./
-COPY start.sh ./
+COPY user-service/start.sh ./
 
 # Make start script executable
 RUN chmod +x ./start.sh

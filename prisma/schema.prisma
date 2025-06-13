@@ -16,4 +16,21 @@ model User {
   username String   @unique
   image    String?
   bio      String?   
+  
+  // Add relationships for following feature
+  followers Follows[] @relation("UserFollowers")
+  following Follows[] @relation("UserFollowing")
+}
+
+// Add model for tracking follow relationships
+model Follows {
+  follower    User   @relation("UserFollowers", fields: [followerId], references: [id])
+  followerId  String
+  following   User   @relation("UserFollowing", fields: [followingId], references: [id])
+  followingId String
+  createdAt   DateTime @default(now())
+
+  // Create composite primary key
+  @@id([followerId, followingId])
+  @@index([followingId])
 }
