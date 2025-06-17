@@ -9,26 +9,36 @@ const prismaClientSingleton = () => {
       db: {
         url: config.database.url
       }
-    },
-    // Enhanced logging configuration
-    log: [
-      {
-        emit: 'event',
-        level: 'query',
-      },
-      {
-        emit: 'event',
-        level: 'error',
-      },
-      {
-        emit: 'event',
-        level: 'info',
-      },
-      {
-        emit: 'event',
-        level: 'warn',
-      },
-    ],
+    },    // Enhanced logging configuration - only log queries in development
+    log: process.env.NODE_ENV === 'development' 
+      ? [
+          {
+            emit: 'event',
+            level: 'query',
+          },
+          {
+            emit: 'event',
+            level: 'error',
+          },
+          {
+            emit: 'event',
+            level: 'info',
+          },
+          {
+            emit: 'event',
+            level: 'warn',
+          },
+        ]
+      : [
+          {
+            emit: 'event',
+            level: 'error',
+          },
+          {
+            emit: 'event',
+            level: 'warn',
+          },
+        ],
     // Connection pooling settings
     __internal: {
       engine: {
