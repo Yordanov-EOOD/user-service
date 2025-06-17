@@ -49,4 +49,4 @@ COPY start.sh ./
 RUN chmod +x ./start.sh
 
 # Startup command
-CMD ["sh", "-c", "while ! pg_isready -h user-db -U $USER_DB_USER -d $USER_DB_NAME; do echo 'Waiting for database...'; sleep 2; done && npx prisma migrate deploy && node src/index.js"]
+CMD ["sh", "-c", "while ! pg_isready -h user-db -U $USER_DB_USER -d $USER_DB_NAME; do echo 'Waiting for database...'; sleep 2; done && if [ ! -d 'prisma/migrations' ] || [ -z \"$(ls -A prisma/migrations 2>/dev/null)\" ]; then echo 'No migrations found, generating initial migration...'; npx prisma migrate dev --name init --skip-seed; else echo 'Found existing migrations, deploying...'; npx prisma migrate deploy; fi && node src/index.js"]
